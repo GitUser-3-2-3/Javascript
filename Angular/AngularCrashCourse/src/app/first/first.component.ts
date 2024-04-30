@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {MessageDetailsComponent} from "../message-details/message-details.component";
+import {FirstService} from "../services/first.service";
 
 @Component({
     selector: 'app-first',
@@ -22,10 +23,17 @@ export class FirstComponent {
     isSubmitted: boolean = false;
     messages: Array<any> = [];
 
+    constructor(
+        private service: FirstService
+    ) {
+        this.messages = this.service.getAllMessages();
+        this.isSubmitted = this.messages.length > 0;
+    }
+
     onSubmit() {
         this.isSubmitted = true;
 
-        this.messages.push({
+        this.service.insert({
             'name': this.name,
             'email': this.email,
             'message': this.message
@@ -35,6 +43,6 @@ export class FirstComponent {
     }
 
     deleteMessage(index: number) {
-        this.messages.splice(index, 1);
+        this.service.deleteMessage(index);
     }
 }
