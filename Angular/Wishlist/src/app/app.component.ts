@@ -3,11 +3,22 @@ import {RouterOutlet} from '@angular/router';
 import {WishItem} from "../shared/models/wishItem";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {WishListComponent} from "./wish-list/wish-list.component";
+import {AddWishComponent} from "./add-wish/add-wish.component";
+import {WishFilterComponent} from "./wish-filter/wish-filter.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, NgForOf, NgIf, FormsModule],
+    imports: [
+        RouterOutlet,
+        NgForOf,
+        NgIf,
+        FormsModule,
+        WishListComponent,
+        AddWishComponent,
+        WishFilterComponent
+    ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
@@ -18,35 +29,5 @@ export class AppComponent {
         new WishItem('Find grass that cuts itself')
     ]
 
-    listFilter: String = '0';
-    newWishText: string = '';
-    title: string = 'Wishlist';
-
-    get visibleItems(): WishItem[] {
-        let value = this.listFilter;
-
-        if (value === '0') {
-            return this.items;
-        } else if (value === '1') {
-            return this.items.filter(
-                item => !item.isComplete
-            );
-        } else {
-            return this.items.filter(
-                item => item.isComplete
-            );
-        }
-    }
-
-    addNewWish() {
-        // 1. add wish to the items array
-        // 2. clear the input
-        this.items.push(new WishItem(this.newWishText));
-        this.newWishText = '';
-    }
-
-    toggleItem(item: WishItem) {
-        item.isComplete = !item.isComplete;
-        console.log(item);
-    }
+    filter: any = () => {};
 }
