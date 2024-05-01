@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {WishListComponent} from "./wish-list/wish-list.component";
 import {AddWishComponent} from "./add-wish/add-wish.component";
 import {WishFilterComponent} from "./wish-filter/wish-filter.component";
+import events from './../shared/services/EventService';
 
 @Component({
     selector: 'app-root',
@@ -29,5 +30,12 @@ export class AppComponent {
         new WishItem('Find grass that cuts itself')
     ]
 
-    filter: any = () => {};
+    constructor() {
+        events.listen('removeWish', (wish: any) => {
+            let index = this.items.indexOf(wish)
+            this.items.splice(index, 1);
+        })
+    }
+
+    filter: any;
 }
