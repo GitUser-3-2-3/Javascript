@@ -1,14 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NgClass} from "@angular/common";
-import events from './../../shared/services/EventService';
+import {Component, Input, OnInit} from '@angular/core';
 import {WishItem} from "../../shared/models/wishItem";
+import {EventService} from "../../shared/services/EventService";
 
 @Component({
     selector: 'wish-list-item',
-    standalone: true,
-    imports: [
-        NgClass
-    ],
     templateUrl: './wish-list-item.component.html',
     styleUrl: './wish-list-item.component.css'
 })
@@ -22,7 +17,9 @@ export class WishListItemComponent implements OnInit {
         }
     }
 
-    constructor() {
+    constructor(
+        private events: EventService
+    ) {
     }
 
     ngOnInit() {
@@ -34,6 +31,6 @@ export class WishListItemComponent implements OnInit {
     }
 
     removeWish() {
-        events.emit('removeWish', this.wish);
+        this.events.emit('removeWish', this.wish);
     }
 }

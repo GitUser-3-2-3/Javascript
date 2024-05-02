@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormsModule} from "@angular/forms";
 import {WishItem} from "../../shared/models/wishItem";
 
 const filters = [
@@ -10,10 +9,6 @@ const filters = [
 
 @Component({
     selector: 'app-wish-filter',
-    standalone: true,
-    imports: [
-        FormsModule
-    ],
     templateUrl: './wish-filter.component.html',
     styleUrl: './wish-filter.component.css'
 })

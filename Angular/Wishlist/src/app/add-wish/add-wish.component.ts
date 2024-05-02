@@ -1,22 +1,19 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {WishItem} from "../../shared/models/wishItem";
 
 @Component({
     selector: 'app-add-wish',
-    standalone: true,
-    imports: [
-        FormsModule
-    ],
     templateUrl: './add-wish.component.html',
     styleUrl: './add-wish.component.css'
 })
-export class AddWishComponent implements OnInit{
+export class AddWishComponent implements OnInit {
     @Output() addWish = new EventEmitter<WishItem>();
+
     constructor() {
     }
 
     ngOnInit(): void {
+        // does something
     }
 
     newWishText: string = '';
